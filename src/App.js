@@ -4,8 +4,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>MeG!</h1>
-        <p>Welcome to MeG!</p>
+        <h1 id="MeG">MeG!</h1>
+        <p>Welcome to My-eGuardian!</p>
       </header>
     </div>
   );
