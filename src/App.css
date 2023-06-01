@@ -1,0 +1,17 @@
+.navbar {
+    width: 100%;
+    position: fixed;
+    background-color:aquamarine;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    list-style-type: none;
+  } 
+  
+  .nav-item {
+    margin: 0 40px;
+  }
+  
+  .nav-item a {
+    color:black;
+  }
