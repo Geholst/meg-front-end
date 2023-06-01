@@ -1,0 +1,12 @@
+.App {
+    background-color: darkorchid;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#MeG {
+    display: flex;
+    justify-content: center;
+
+}
