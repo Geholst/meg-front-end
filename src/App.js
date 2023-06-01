@@ -8,8 +8,8 @@ function App() {
     <li class="li-inline-nav-item"><a href="/login">Login</a></li>
         </nav>
       <header className="App-header">
-        <h1>MeG!</h1>
-        <p>Welcome to MeG!</p>
+        <h1 id="MeG">MeG!</h1>
+        <p>Welcome to My-eGuardian!</p>
       </header>
     </div>
   );
