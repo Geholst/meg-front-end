@@ -1,3 +1,14 @@
 .nav-item.nav-link {
   color: white;
 }
+
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+button#login-btn.btn.btn-success {
+  display: flex;
+  justify-content: center;
+}
