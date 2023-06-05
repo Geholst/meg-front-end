@@ -31,15 +31,11 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 ![alt text](assets/images/screenshot.png)
 
 ## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
+collaborators: 
+  Joel: https://github.com/roketteere 
+  Heather: https://github.com/miss-heather 
+  Cody: https://github.com/codyt93 
+  George: https://github.com/Geholst 
+  
 ## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
+MIT license
