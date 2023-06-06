@@ -1,7 +1,17 @@
+* {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body{
+  background-color: #f1f1f1;
+}
 .nav-item.nav-link {
   color: white;
 }
 
+main {
+position: relative;
+}
 
 h1 {
   display: flex;
@@ -11,4 +21,14 @@ h1 {
 button#login-btn.btn.btn-success {
   display: flex;
   justify-content: center;
+}
+
+footer {
+  text-align: center;
+  background-color: #292b2c;
+  color: white;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
