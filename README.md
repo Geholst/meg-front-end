@@ -32,10 +32,10 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 collaborators: 
-  Joel: https://github.com/roketteere 
-  Heather: https://github.com/miss-heather 
-  Cody: https://github.com/codyt93 
-  George: https://github.com/Geholst 
+- Joel: https://github.com/roketteere 
+ - Heather: https://github.com/miss-heather 
+ - Cody: https://github.com/codyt93 
+ - George: https://github.com/Geholst 
   
 ## License
 MIT license
