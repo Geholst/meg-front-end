@@ -12,7 +12,7 @@ export default function Login() {
     event.preventDefault();
 
     if (validateForm()) {
-      console.log(formData);
+      // console.log(formData);
       let results = await fetch("https://meg-backend.herokuapp.com/login", {
         method: "POST",
         headers: {
@@ -27,11 +27,14 @@ export default function Login() {
       if (results.status === 200) {
         results = await results.json();
         localStorage.setItem("token", results.jwtToken);
+        localStorage.setItem("email", results.email);
         // Successful login, handle the response data
         console.log(results);
+        window.location.href = "/dashboard";
       } else {
         // Login failed, display an error message
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
         alert("Login Failed");
       }
     }
