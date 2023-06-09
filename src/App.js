@@ -9,6 +9,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Footer from "./Footer";
 import GPS from "./components/GPS";
+import Dashboard from "./components/Dashboard";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/gps" element={<GPS />} />
           </Routes>
         </main>

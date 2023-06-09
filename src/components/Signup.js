@@ -35,11 +35,13 @@ export default function Login() {
       });
       if (results.status === 200) {
         results = await results.json();
-        localStorage.setItem("token", results.jwtToken);
+        localStorage.setItem("token", results.New_User.jwtToken);
+        localStorage.setItem("email", results.New_User.email);
+        window.location.href = "/dashboard";
       } else {
         alert("Signup Failed");
       }
-      console.log(results);
+      console.log(results.New_User);
     }
   };
 

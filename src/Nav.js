@@ -1,6 +1,17 @@
 import React from "react";
 
 export default function Nav() {
+  let status;
+  let dash;
+  const logged = localStorage.getItem("token");
+  if (logged) {
+    status = "Logout";
+    dash = "dashboard";
+  } else {
+    status = "Signup";
+    dash = "login";
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
@@ -21,11 +32,11 @@ export default function Nav() {
           <a className="nav-item nav-link" href="/">
             Home <span className="sr-only"></span>
           </a>
-          <a className="nav-item nav-link" href="/login">
-            Login
+          <a className="nav-item nav-link" href={"/" + dash}>
+            {dash}
           </a>
-          <a className="nav-item nav-link" href="/signup">
-            Signup
+          <a className="nav-item nav-link" href={"/" + status}>
+            {status}
           </a>
           <a className="nav-item nav-link" href="/gps">
             GPS
