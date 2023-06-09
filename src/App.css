@@ -1,8 +1,9 @@
 * {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
-body{
+body {
   background-color: #f1f1f1;
 }
 .nav-item.nav-link {
@@ -10,7 +11,7 @@ body{
 }
 
 main {
-position: relative;
+  position: relative;
 }
 
 h1 {
@@ -37,3 +38,6 @@ footer {
   font-size: 50px;
 }
 
+#map {
+  height: 100%;
+}
