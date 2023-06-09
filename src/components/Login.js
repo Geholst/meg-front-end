@@ -1,15 +1,96 @@
+import React, { useState } from "react";
 
-export default function Login (){
-    return (
-        <section>
-            <h1>Login page!</h1>
-  <span class="input-group-text">@</span>
-  <input type="text" class="form-control" placeholder="Username" id="username-input" aria-label="Username" aria-describedby="basic-addon1" />
-  <span class="input-group-text">#</span>
-  <input type="password" class="form-control"  placeholder="Password"  id="password-input" aria-label="Password" aria-describedby="basic-addon1" />
+export default function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    <button id="login-btn" type="submit" class="btn btn-success">Submit</button>
+  const [errors, setErrors] = useState({});
 
-        </section>
-    );
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (validateForm()) {
+      console.log(formData);
+      let results = await fetch("https://meg-backend.herokuapp.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (results.status === 200) {
+        results = await results.json();
+        localStorage.setItem("token", results.jwtToken);
+        // Successful login, handle the response data
+        console.log(results);
+      } else {
+        // Login failed, display an error message
+        localStorage.removeItem("token");
+        alert("Login Failed");
+      }
+    }
+  };
+
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    if (!formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/)) {
+      newErrors.email = "Invalid email address.";
+      isValid = false;
+    }
+
+    if (formData.password.trim() === "") {
+      newErrors.password = "Password is required.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.email && <div className="error">{errors.email}</div>}
+      </div>
+      <div>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.password && <div className="error">{errors.password}</div>}
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  );
 }
