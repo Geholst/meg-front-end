@@ -1,4 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import { json } from "react-router-dom";
+let checkUp;
+let checks;
+let checkItems = [];
+let map;
 
 const GPS = () => {
   const mapRef = useRef(null);
@@ -7,14 +12,13 @@ const GPS = () => {
   const initMap = async (latitude, longitude) => {
     const { Map, Circle } = await window.google.maps.importLibrary("maps");
     const mapElement = mapRef.current;
-    let map;
 
     if (mapElement) {
       map = new Map(mapElement, {
         center: { lat: latitude, lng: longitude },
         zoom: 19,
       });
-
+      console.log(map);
       // Add a circle overlay to represent the radius
       const circle = new Circle({
         map,
@@ -27,13 +31,24 @@ const GPS = () => {
         fillOpacity: 0.35,
       });
     }
-    console.log(map);
   };
 
   useEffect(() => {
+    if (localStorage.getItem("checkItems")) {
+      checkItems = JSON.parse(localStorage.getItem("checkItems"));
+      checks = checkItems.length;
+    } else {
+      checks = 0;
+    }
     const successCallback = (position) => {
       const { latitude, longitude } = position.coords;
-      console.log("User's location:", latitude, longitude);
+      checkUp = {
+        checkNumber: checks++,
+        latitude: latitude,
+        longitude: longitude,
+      };
+      checkItems.push(checkUp);
+      localStorage.setItem("checkItems", JSON.stringify(checkItems));
       initMap(latitude, longitude);
     };
 
@@ -56,7 +71,11 @@ const GPS = () => {
   }, []);
 
   return (
-    <div id="map" ref={mapRef} style={{ width: "100%", height: "400px" }}></div>
+    <div id="map" ref={mapRef} style={{ width: "100%", height: "600px" }}>
+      <span className="d-flex justify-content-center fs-1 m-3 p-3 ">
+        Loading...
+      </span>
+    </div>
   );
 };
 

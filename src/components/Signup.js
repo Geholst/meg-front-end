@@ -18,7 +18,8 @@ export default function Login() {
 
     if (validateForm()) {
       console.log(formData);
-      let results = await fetch("https://meg-backend.herokuapp.com/signup", {
+      // https://meg-backend.herokuapp.com/signup  || http://127.0.0.1:3001/signup
+      let results = await fetch("http://127.0.0.1:3001/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +36,7 @@ export default function Login() {
       });
       if (results.status === 200) {
         results = await results.json();
+        localStorage.setItem("userId", results.New_User.userId);
         localStorage.setItem("token", results.New_User.jwtToken);
         localStorage.setItem("email", results.New_User.email);
         window.location.href = "/dashboard";

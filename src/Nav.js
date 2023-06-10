@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap";
 
 export default function Nav() {
   let status;
@@ -27,10 +28,12 @@ export default function Nav() {
         aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="navbar" id="navbarNavAltMarkup">
+      <div
+        className="collapse navbar-collapse justify-content-end"
+        id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <a className="nav-item nav-link" href="/">
-            Home <span className="sr-only"></span>
+            Home
           </a>
           <a className="nav-item nav-link" href={"/" + dash}>
             {dash}
@@ -38,9 +41,11 @@ export default function Nav() {
           <a className="nav-item nav-link" href={"/" + status}>
             {status}
           </a>
-          <a className="nav-item nav-link" href="/gps">
-            GPS
-          </a>
+          {logged ? (
+            <a className="nav-item nav-link" href="/gps">
+              Location
+            </a>
+          ) : null}
         </div>
       </div>
     </nav>
