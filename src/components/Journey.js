@@ -1,33 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Journey = () => {
   const [journeys, setJourneys] = useState([]);
   const [newJourney, setNewJourney] = useState({
-    userId: 1,
+    userId: localStorage.getItem("userId"),
     type: "",
     details: "",
     endTime: "",
     route: "",
   });
 
-  useEffect(() => {
-    // Fetch journeys from the server
-    const fetchJourneys = async () => {
-      try {
-        const response = await fetch("https://meg-backend.herokuapp.com/api/journey");
-        if (response.ok) {
-          const data = await response.json();
-          setJourneys(data);
-        } else {
-          console.error("Error fetching journeys:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching journeys:", error);
-      }
-    };
-
-    fetchJourneys();
-  }, []);
+  const handleChange = (event) => {
+    setNewJourney({
+      ...newJourney,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,7 +33,7 @@ const Journey = () => {
         const data = await response.json();
         setJourneys([...journeys, data]);
         setNewJourney({
-          userId: 1,
+          userId: localStorage.getItem("userId"),
           type: "",
           details: "",
           endTime: "",
@@ -59,67 +47,65 @@ const Journey = () => {
     }
   };
 
-  const handleChange = (event) => {
-    setNewJourney({
-      ...newJourney,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   return (
     <div>
       <h2>Journeys</h2>
-
       <form onSubmit={handleSubmit}>
-        <label>
-          Type:
+        <div className="form-group">
+          <label htmlFor="type">Type:</label>
           <input
             type="text"
+            className="form-control"
+            id="type"
             name="type"
             value={newJourney.type}
             onChange={handleChange}
           />
-        </label>
-        <br />
-        <label>
-          Details:
+        </div>
+        <div className="form-group">
+          <label htmlFor="details">Details:</label>
           <input
             type="text"
+            className="form-control"
+            id="details"
             name="details"
             value={newJourney.details}
             onChange={handleChange}
           />
-        </label>
-        <br />
-        <label>
-          End Time:
+        </div>
+        <div className="form-group">
+          <label htmlFor="endTime">End Time:</label>
           <input
             type="datetime-local"
+            className="form-control"
+            id="endTime"
             name="endTime"
             value={newJourney.endTime}
             onChange={handleChange}
           />
-        </label>
-        <br />
-        <label>
-          Route:
+        </div>
+        <div className="form-group">
+          <label htmlFor="route">Route:</label>
           <input
             type="text"
+            className="form-control"
+            id="route"
             name="route"
             value={newJourney.route}
             onChange={handleChange}
           />
-        </label>
-        <br />
-        <button type="submit">Create Journey</button>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Create Journey
+        </button>
       </form>
 
       {journeys.length === 0 ? (
         <p>No journeys found.</p>
       ) : (
-        <ul>
+        <ul className="list-group">
           {journeys.map((journey) => (
-            <li key={journey.id}>
+            <li key={journey.id} className="list-group-item">
               <h3>{journey.type}</h3>
               <p>{journey.details}</p>
               <p>Start Time: {journey.startTime}</p>
