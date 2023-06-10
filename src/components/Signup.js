@@ -19,7 +19,7 @@ export default function Login() {
     if (validateForm()) {
       console.log(formData);
       // https://meg-backend.herokuapp.com/signup  || http://127.0.0.1:3001/signup
-      let results = await fetch("http://127.0.0.1:3001/signup", {
+      let results = await fetch("https://meg-backend.herokuapp.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

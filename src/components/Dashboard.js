@@ -16,15 +16,18 @@ const Dashboard = () => {
       window.location.href = "/signup";
     } else {
       const getProfile = async () => {
-        let results = await fetch(`http://127.0.0.1:3001/api/profile`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: userId,
-          }),
-        });
+        let results = await fetch(
+          `https://meg-backend.herokuapp.com/api/profile`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userId,
+            }),
+          }
+        );
         results = await results.json();
         setUserData(results);
         // alert(`User retrieved: ${JSON.stringify(results)}`);

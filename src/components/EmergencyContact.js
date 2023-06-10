@@ -23,13 +23,16 @@ const EmergencyContact = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:3001/api/emergency", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newContact),
-      });
+      const response = await fetch(
+        "https://meg-backend.herokuapp.com/api/emergency",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newContact),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Rating = () => {
   const [ratings, setRatings] = useState([]);
@@ -20,13 +20,16 @@ const Rating = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:3001/api/rating", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newRating),
-      });
+      const response = await fetch(
+        "https://meg-backend.herokuapp.com/api/rating",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newRating),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -44,28 +47,6 @@ const Rating = () => {
       console.error("Error creating rating:", error);
     }
   };
-
-  useEffect(() => {
-    const fetchRatings = async () => {
-      try {
-        const response = await fetch(
-          "http://127.0.0.1:3001/api/rating/user/" +
-            localStorage.getItem("userId")
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setRatings(data);
-        } else {
-          console.error("Error fetching ratings:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching ratings:", error);
-      }
-    };
-
-    fetchRatings();
-  }, []);
 
   return (
     <div>

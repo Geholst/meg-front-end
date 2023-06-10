@@ -18,13 +18,16 @@ const Experience = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:3001/api/experience", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newExperience),
-      });
+      const response = await fetch(
+        "https://meg-backend.herokuapp.com/api/experience",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newExperience),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
