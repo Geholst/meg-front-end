@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
 const Experience = () => {
   const [experiences, setExperiences] = useState([]);
@@ -6,6 +7,8 @@ const Experience = () => {
     userId: localStorage.getItem("userId"),
     description: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (event) => {
     setNewExperience({
@@ -36,6 +39,7 @@ const Experience = () => {
           userId: localStorage.getItem("userId"),
           description: "",
         });
+        setShowModal(false); // Close the modal after submitting
       } else {
         console.error("Error creating experience:", response.status);
       }
@@ -44,11 +48,19 @@ const Experience = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:3001/api/experience/user/" +
+          "https://meg-backend.herokuapp.com/api/experience/user/" +
             localStorage.getItem("userId")
         );
 
@@ -67,24 +79,34 @@ const Experience = () => {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center justify-content-center my-5">
       <h2>Experiences</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            name="description"
-            value={newExperience.description}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Experience
-        </button>
-      </form>
+      <button className="btn btn-primary" onClick={handleOpenModal}>
+        Add Experience
+      </button>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Experience</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="bg-warning">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formDescription">
+              <Form.Label>Description:</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                value={newExperience.description}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button className="mt-2" variant="primary" type="submit">
+              Save Experience
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
 
       {experiences.length === 0 ? (
         <p>No experiences found.</p>

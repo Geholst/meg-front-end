@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Button  from 'react-bootstrap/Button';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 import Nav from "./Nav";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -13,6 +12,9 @@ import Footer from "./Footer";
 import GPS from "./components/GPS";
 import Dashboard from "./components/Dashboard";
 import Logout from "./components/Logout";
+import EmergencyContact from "./components/EmergencyContact";
+import Journey from "./components/Journey";
+import Dating from "./components/Dating";
 
 function App() {
   return (
@@ -29,7 +31,10 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dating" element={<Dating />} />
             <Route path="/gps" element={<GPS />} />
+            <Route path="/emergency" element={<EmergencyContact />} />
+            <Route path="/journey" element={<Journey />} />
           </Routes>
         </main>
         <footer>

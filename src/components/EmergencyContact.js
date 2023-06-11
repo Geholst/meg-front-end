@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+let userId;
+userId = localStorage.getItem("userId");
 
 const EmergencyContact = () => {
+  const [showModal, setShowModal] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [newContact, setNewContact] = useState({
-    userId: 1,
+    userId: userId,
     name: "",
     number: "",
     relationship: "",
   });
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedContact, setSelectedContact] = useState(null);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
 
   const handleChange = (event) => {
     setNewContact({
@@ -21,7 +30,6 @@ const EmergencyContact = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch(
         "https://meg-backend.herokuapp.com/api/emergency",
@@ -38,7 +46,7 @@ const EmergencyContact = () => {
         const data = await response.json();
         setContacts([...contacts, data]);
         setNewContact({
-          userId: 1,
+          userId: userId,
           name: "",
           number: "",
           relationship: "",
@@ -53,128 +61,62 @@ const EmergencyContact = () => {
         [event.target.name]: event.target.value,
       });
     }
+    console.log(newContact);
+    handleCloseModal();
   };
-
-  const handleOpenModal = (contact) => {
-    setSelectedContact(contact);
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setSelectedContact(null);
-  };
-
-  //   useEffect(() => {
-  //     // Fetch existing emergency contacts for the user
-  //     const fetchContacts = async () => {
-  //       try {
-  //         const response = await fetch("http://127.0.0.1:3001/api/emergency");
-  //         if (response.ok) {
-  //           const data = await response.json();
-  //           setContacts(data);
-  //         } else {
-  //           console.error("Error fetching emergency contacts:", response.status);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching emergency contacts:", error);
-  //       }
-  //     };
-
-  //     fetchContacts();
-  //   }, []);
 
   return (
     <div>
       <h2>Emergency Contacts</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={newContact.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="number">Number:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="number"
-            name="number"
-            value={newContact.number}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="relationship">Relationship:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="relationship"
-            name="relationship"
-            value={newContact.relationship}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Contact
-        </button>
-      </form>
+      <Button variant="primary" onClick={handleShowModal}>
+        Add Contact
+      </Button>
 
-      {contacts.length === 0 ? (
-        <p>No emergency contacts found.</p>
-      ) : (
-        <ul className="list-group">
-          {contacts.map((contact) => (
-            <li
-              key={contact.id}
-              className="list-group-item d-flex justify-content-between align-items-center">
-              {contact.name}
-              <button
-                type="button"
-                className="btn btn-link"
-                onClick={() => handleOpenModal(contact)}>
-                View
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {modalOpen && selectedContact && (
-        <div className="modal" style={{ display: "block" }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{selectedContact.name}</h5>
-                <button
-                  type="button"
-                  className="close"
-                  onClick={handleCloseModal}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>Number: {selectedContact.number}</p>
-                <p>Relationship: {selectedContact.relationship}</p>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={handleCloseModal}>
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Contact</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={newContact.name}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formNumber">
+              <Form.Label>Number:</Form.Label>
+              <Form.Control
+                type="text"
+                name="number"
+                value={newContact.number}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formRelationship">
+              <Form.Label>Relationship:</Form.Label>
+              <Form.Control
+                type="text"
+                name="relationship"
+                value={newContact.relationship}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button
+              className="btn btn-primary mt-2"
+              variant="primary"
+              type="submit">
+              Save Contact
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

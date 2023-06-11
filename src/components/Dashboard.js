@@ -41,7 +41,7 @@ const Dashboard = () => {
     userData || {};
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="card mt-4">
         <div className="card-body">
           <h2 className="card-title">
@@ -73,13 +73,30 @@ const Dashboard = () => {
             </div>
           </div>
           <hr />
+
           <h3 className="card-title mb-3 mt-4 text-center fs-1">
             User Content
           </h3>
-          <EmergencyContact />
-          <Journey />
-          <Experience />
-          <Rating />
+          <div className="d-flex justify-content-center m-1 p-2 ">
+            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
+              <EmergencyContact />
+            </button>
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
+              <Journey />
+            </button>
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
+              <Experience />
+            </button>
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
+              <Rating />
+            </button>
+          </div>
         </div>
       </div>
     </div>
