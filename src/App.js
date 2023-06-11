@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Button  from 'react-bootstrap/Button';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Nav from "./Nav";
+import Navigation from "./Nav";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <header className="Nav">
-          <Nav />
+          <Navigation />
         </header>
 
         <main>
