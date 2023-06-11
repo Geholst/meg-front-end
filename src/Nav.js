@@ -1,53 +1,23 @@
 import React from "react";
-import "bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
-export default function Nav() {
-  let status;
-  let dash;
+export default function Navigation() {
   const logged = localStorage.getItem("token");
-  if (logged) {
-    status = "Logout";
-    dash = "dashboard";
-  } else {
-    status = "Signup";
-    dash = "login";
-  }
+  const status = logged ? "Logout" : "Signup";
+  const dash = logged ? "dashboard" : "login";
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
-        MeG
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div
-        className="collapse navbar-collapse justify-content-end"
-        id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <a className="nav-item nav-link" href="/">
-            Home
-          </a>
-          <a className="nav-item nav-link" href={"/" + dash}>
-            {dash}
-          </a>
-          <a className="nav-item nav-link" href={"/" + status}>
-            {status}
-          </a>
-          {logged ? (
-            <a className="nav-item nav-link" href="/gps">
-              Location
-            </a>
-          ) : null}
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="/">MeG</Navbar.Brand>
+      <Navbar.Toggle aria-controls="navbarNavAltMarkup" />
+      <Navbar.Collapse id="navbarNavAltMarkup">
+        <Nav className="ml-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href={"/" + dash}>{dash}</Nav.Link>
+          <Nav.Link href={"/" + status}>{status}</Nav.Link>
+          {logged && <Nav.Link href="/gps">Location</Nav.Link>}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
