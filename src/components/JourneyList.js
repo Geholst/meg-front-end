@@ -42,7 +42,21 @@ const JourneysList = () => {
             <ListGroup.Item key={index}>
               <p>Type: {journey.type}</p>
               <p>Details: {journey.details}</p>
-              {/* Add more fields as needed */}
+              <p>Start Time: {journey.startTime}</p>
+              <p>End Time: {journey.endTime}</p>
+              <p>Route: {journey.route}</p>
+              <p>Name: {journey.name}</p>
+              <p>Username: {journey.username}</p>
+              <p>License Plate: {journey.licensePlate}</p>
+              <p>Color: {journey.color}</p>
+              <p>Year: {journey.year}</p>
+              <p>Make: {journey.make}</p>
+              <p>Model: {journey.model}</p>
+              <p>Image Name: {journey.imageName}</p>
+              {/* Display the image if it exists and is a valid URL */}
+              {journey.image && (
+                <img src={journey.image} alt={journey.imageName} />
+              )}
             </ListGroup.Item>
           ))}
         </ListGroup>
