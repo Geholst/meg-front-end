@@ -6,7 +6,7 @@ const Rating = () => {
   const [ratings, setRatings] = useState([]);
   const [newRating, setNewRating] = useState({
     userId: userId,
-    journeyId: "",
+    ratingTitle: "",
     rating: "",
     comments: "",
   });
@@ -22,20 +22,23 @@ const Rating = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://meg-backend.herokuapp.com/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newRating),
-      });
+      const response = await fetch(
+        "https://meg-backend.herokuapp.com/api/rating",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newRating),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
         setRatings([...ratings, data]);
         setNewRating({
           userId: userId,
-          journeyId: "",
+          ratingTitle: "",
           rating: "",
           comments: "",
         });
@@ -68,6 +71,15 @@ const Rating = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formRatingTitle">
+              <Form.Label>Rating Title:</Form.Label>
+              <Form.Control
+                type="text"
+                name="ratingTitle"
+                value={newRating.ratingTitle}
+                onChange={handleChange}
+              />
+            </Form.Group>
             <Form.Group controlId="formRating">
               <Form.Label>Rating:</Form.Label>
               <Form.Control
@@ -99,19 +111,6 @@ const Rating = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {ratings.length === 0 ? (
-        <p>No ratings found.</p>
-      ) : (
-        <ul className="list-group">
-          {ratings.map((rating) => (
-            <li key={rating.id} className="list-group-item">
-              <p>Rating: {rating.rating}</p>
-              <p>Comments: {rating.comments}</p>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };

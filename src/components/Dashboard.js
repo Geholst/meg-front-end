@@ -6,6 +6,7 @@ import Rating from "./Rating";
 import EmergencyContactsList from "./EmergencyContactList";
 import ExperiencesList from "./ExperiencesList";
 import JourneysList from "./JourneyList";
+import RatingList from "./RatingList";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -93,6 +94,9 @@ const Dashboard = () => {
           </div>
           <div className="d-flex justify-content-center m-1 p-2">
             <ExperiencesList />
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <RatingList />
           </div>
           <div className="d-flex justify-content-center m-1 p-2">
             <button className="d-flex justify-content-center m-1 p-2 bg-warning">
