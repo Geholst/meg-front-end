@@ -61,8 +61,9 @@ const EmergencyContact = () => {
         [event.target.name]: event.target.value,
       });
     }
-    console.log(newContact);
+
     handleCloseModal();
+    window.location.reload();
   };
 
   return (

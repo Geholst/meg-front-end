@@ -18,7 +18,7 @@ export default function Login() {
     event.preventDefault();
 
     if (validateForm()) {
-      console.log(formData);
+      // console.log(formData);
       let results = await fetch("https://meg-backend.herokuapp.com/signup", {
         method: "POST",
         headers: {
