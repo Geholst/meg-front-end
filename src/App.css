@@ -3,6 +3,9 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
+html {
+  background-color: rgb(246, 195, 68);
+}
 body {
   background-color: #f1f1f1;
 }

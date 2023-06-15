@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
+let userId;
+userId = localStorage.getItem("userId");
 const Experience = () => {
   const [experiences, setExperiences] = useState([]);
   const [newExperience, setNewExperience] = useState({
@@ -60,8 +62,14 @@ const Experience = () => {
     const fetchExperiences = async () => {
       try {
         const response = await fetch(
-          "https://meg-backend.herokuapp.com/api/experience/user/" +
-            localStorage.getItem("userId")
+          "https://meg-backend.herokuapp.com/api/experience/get",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId: userId }),
+          }
         );
 
         if (response.ok) {
@@ -107,18 +115,6 @@ const Experience = () => {
           </Form>
         </Modal.Body>
       </Modal>
-
-      {experiences.length === 0 ? (
-        <p>No experiences found.</p>
-      ) : (
-        <ul className="list-group">
-          {experiences.map((experience) => (
-            <li key={experience.id} className="list-group-item">
-              <p>{experience.description}</p>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };

@@ -3,6 +3,9 @@ import Journey from "./Journey";
 import EmergencyContact from "./EmergencyContact";
 import Experience from "./Experience";
 import Rating from "./Rating";
+import EmergencyContactsList from "./EmergencyContactList";
+import ExperiencesList from "./ExperiencesList";
+import JourneysList from "./JourneyList";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -45,30 +48,35 @@ const Dashboard = () => {
       <div className="card mt-4">
         <div className="card-body">
           <h2 className="card-title">
-            Welcome to your dashboard, {firstName}!
+            Welcome to your dashboard,
+            <span className="text-primary fs-1 bold"> {firstName}</span> !
           </h2>
           <h3 className="card-subtitle mb-3">User Information:</h3>
           <div className="row">
             <div className="col-md-6">
               <p>
-                <strong>First Name:</strong> {firstName}
+                <strong className="text-primary">First Name:</strong>{" "}
+                {firstName}
               </p>
               <p>
-                <strong>Last Name:</strong> {lastName}
+                <strong className="text-primary">Last Name:</strong> {lastName}
               </p>
               <p>
-                <strong>Email:</strong> {email}
+                <strong className="text-primary">Email:</strong> {email}
               </p>
             </div>
             <div className="col-md-6">
               <p>
-                <strong>Phone Number:</strong> {number}
+                <strong className="text-primary">Phone Number:</strong> {number}
               </p>
               <p>
-                <strong>Allergies:</strong> {allergies}
+                <strong className="text-primary">Allergies:</strong> {allergies}
               </p>
               <p>
-                <strong>Preferred Hospital:</strong> {preferredHospital}
+                <strong>
+                  <span className="text-primary"> Preferred Hospital:</span>
+                  <span className="text-danger"> {preferredHospital}</span>
+                </strong>
               </p>
             </div>
           </div>
@@ -77,16 +85,26 @@ const Dashboard = () => {
           <h3 className="card-title mb-3 mt-4 text-center fs-1">
             User Content
           </h3>
-          <div className="d-flex justify-content-center m-1 p-2 ">
-            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
-              <EmergencyContact />
-            </button>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <JourneysList />
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <EmergencyContactsList />
+          </div>
+          <div className="d-flex justify-content-center m-1 p-2">
+            <ExperiencesList />
           </div>
           <div className="d-flex justify-content-center m-1 p-2">
             <button className="d-flex justify-content-center m-1 p-2 bg-warning">
               <Journey />
             </button>
           </div>
+          <div className="d-flex justify-content-center m-1 p-2 ">
+            <button className="d-flex justify-content-center m-1 p-2 bg-warning">
+              <EmergencyContact />
+            </button>
+          </div>
+
           <div className="d-flex justify-content-center m-1 p-2">
             <button className="d-flex justify-content-center m-1 p-2 bg-warning">
               <Experience />
