@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, Dropdown, DropdownButton } from "react-bootstrap";
 
 let userId;
 userId = localStorage.getItem("userId");
@@ -36,20 +36,22 @@ const EmergencyContactsList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center">
       <h2>Emergency Contacts List</h2>
       {contacts.length > 0 ? (
-        <Card style={{ width: "18rem" }}>
-          <ListGroup variant="flush">
-            {contacts.map((contact, index) => (
-              <ListGroup.Item key={index}>
-                <h5>{contact.name}</h5>
-                <p>Number: {contact.number}</p>
-                <p>Relationship: {contact.relationship}</p>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </Card>
+        <DropdownButton id="dropdown-basic-button" title="Emergency Contacts">
+          {contacts.map((contact, index) => (
+            <Dropdown.Item key={index}>
+              <h5>{contact.name}</h5>
+              <span className="text-primary">Number: </span>
+              <span>{contact.number}</span>
+              <br />
+              <span className="text-primary">Relationship: </span>
+              <span>{contact.relationship}</span>
+              <br />
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
       ) : (
         <p>No emergency contacts found.</p>
       )}

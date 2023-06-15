@@ -48,6 +48,7 @@ const Rating = () => {
     } catch (error) {
       console.error("Error creating rating:", error);
     }
+    window.location.reload();
   };
 
   const [modalOpen, setModalOpen] = useState(false);

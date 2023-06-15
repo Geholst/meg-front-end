@@ -48,6 +48,7 @@ const Experience = () => {
     } catch (error) {
       console.error("Error creating experience:", error);
     }
+    window.location.reload();
   };
 
   const handleOpenModal = () => {

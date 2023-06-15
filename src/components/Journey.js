@@ -126,6 +126,8 @@ const Journey = () => {
     } catch (error) {
       console.error("Error creating journey:", error);
     }
+
+    window.location.reload();
   };
 
   const handleModalOpen = () => {

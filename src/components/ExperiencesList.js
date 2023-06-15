@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Dropdown, DropdownButton } from "react-bootstrap";
 
 let userId;
 userId = localStorage.getItem("userId");
@@ -34,16 +34,23 @@ const ExperiencesList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center ">
       <h2>Experiences List</h2>
       {experiences.length > 0 ? (
-        <ListGroup>
+        <DropdownButton id="dropdown-basic-button" title="Experiences">
           {experiences.map((experience, index) => (
-            <ListGroup.Item key={index}>
-              <p>{experience.description}</p>
-            </ListGroup.Item>
+            <Dropdown.Item key={index}>
+              <div className="container border border-primary rounded">
+                <span className="text-primary border-bottom border-primary">
+                  Experience Description:
+                </span>
+                <br />
+                <span>{experience.description}</span>
+                <br />
+              </div>
+            </Dropdown.Item>
           ))}
-        </ListGroup>
+        </DropdownButton>
       ) : (
         <p>No experiences found.</p>
       )}

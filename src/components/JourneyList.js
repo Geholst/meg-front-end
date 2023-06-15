@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Dropdown, DropdownButton } from "react-bootstrap";
 
 let userId;
 userId = localStorage.getItem("userId");
@@ -34,51 +34,58 @@ const JourneysList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center">
       <h2>Journeys List</h2>
       {journeys.length > 0 ? (
-        <ListGroup>
+        <DropdownButton id="dropdown-basic-button" title="Journeys">
           {journeys.map((journey, index) => (
-            <ListGroup.Item key={index}>
-              <span className="text-primary">Type: {journey.type}</span>
+            <Dropdown.Item key={index}>
+              <span className="text-primary">Type: </span>
+              <span>{journey.type}</span>
               <br />
-              <span className="text-primary">Details: {journey.details}</span>
+              <span className="text-primary">Details: </span>
+              <span>{journey.details}</span>
               <br />
-              <span className="text-primary">
-                Start Time: {journey.startTime}
-              </span>
+              <span className="text-primary">Start Time:</span>
+              <span>{journey.startTime}</span>
               <br />
-              <span className="text-primary">End Time: {journey.endTime}</span>
+              <span className="text-primary">End Time: </span>
+              <span>{journey.endTime}</span>
               <br />
-              <span className="text-primary">Route: {journey.route}</span>
+              <span className="text-primary">Route: </span>
+              <span>{journey.route}</span>
               <br />
-              <span className="text-primary">Name: {journey.name}</span>
+              <span className="text-primary">Name: </span>
+              <span>{journey.name}</span>
               <br />
-              <span className="text-primary">Username: {journey.username}</span>
+              <span className="text-primary">Username: </span>
+              <span>{journey.username}</span>
               <br />
-              <span className="text-primary">
-                License Plate: {journey.licensePlate}
-              </span>
+              <span className="text-primary">License Plate:</span>
+              <span>{journey.licensePlate}</span>
               <br />
-              <span className="text-primary">Color: {journey.color}</span>
+              <span className="text-primary">Color: </span>
+              <span>{journey.color}</span>
               <br />
-              <span className="text-primary">Year: {journey.year}</span>
+              <span className="text-primary">Year: </span>
+              <span>{journey.year}</span>
               <br />
-              <span className="text-primary">Make: {journey.make}</span>
+              <span className="text-primary">Make: </span>
+              <span>{journey.make}</span>
               <br />
-              <span className="text-primary">Model: {journey.model}</span>
+              <span className="text-primary">Model: </span>
+              <span>{journey.model}</span>
               <br />
-              <span className="text-primary">
-                Image Name: {journey.imageName}
-              </span>
+              <span className="text-primary">Image Name:</span>
+              <span>{journey.imageName}</span>
               <br />
               {/* Display the image if it exists and is a valid URL */}
               {journey.image && (
                 <img src={journey.image} alt={journey.imageName} />
               )}
-            </ListGroup.Item>
+            </Dropdown.Item>
           ))}
-        </ListGroup>
+        </DropdownButton>
       ) : (
         <p>No journeys found.</p>
       )}
