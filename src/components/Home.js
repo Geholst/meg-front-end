@@ -1,73 +1,38 @@
 export default function Home() {
   return (
-    <section id="form">
-      <h1 className="header">Welcome to MeG!</h1>
-      <form>
-        <label id="MeGs"> MeGs Diary</label>
-        <form>
-          <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <label htmlFor="validationDefault01">First name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault01"
-                placeholder="First name"
-                required
-              />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label htmlFor="validationDefault02">Last name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault02"
-                placeholder="Last name"
-                required
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-6 mb-3">
-              <label htmlFor="validationDefault03">
-                Where will you be going?
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault03"
-                placeholder="Adress"
-                required
-              />
-            </div>
-            <div class="col-md-3 mb-3">
-              <label htmlFor="validationDefault04">Who will you be with?</label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault04"
-                placeholder="Name"
-                required
-              />
-            </div>
-            <div class="col-md-3 mb-3">
-              <label htmlFor="validationDefault05">
-                How will you get there?
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="validationDefault05"
-                placeholder="Uber, Lyft, Taxi?"
-                required
-              />
-            </div>
-          </div>
-          <button class="btn btn-primary" type="submit">
-            Submit form
-          </button>
-        </form>
-      </form>
-    </section>
+    <div className="container p-2 bg-warning">
+      <section className="card p-2 mb-2">
+        <h1 className="card-title p-2">Welcome to My E-Guardian App</h1>
+      </section>
+      <section className="card p-2 mb-2">
+        <h2 className="card-title p-2">What is My E-Guardian App?</h2>
+        <p className="card-text p-2">
+          My E-Guardian App is a web application that allows users to log and
+          track different journeys. These journeys can be anything from a trip
+          to the grocery store to a trip to the hospital. Users can also log
+          their experiences at different locations and rate them. This
+          information can be used to help other users make informed decisions
+          about where they go and what they do. This information is intended to
+          be saved and shared to our database. To user can share information by
+          logging and retrieve their information by looking through their
+          dashboard. In the dashboard, the user can also add journey,
+          experience, and rating information. The user also has the ability to
+          click on the location button if they wish to screenshot and save a
+          local map of their current location to their device's local
+          storage(somewhere in their photo library).
+        </p>
+      </section>
+      <section className="card p-2">
+        <h2 className="card-title p-2">How to use My E-Guardian App</h2>
+        <p className="card-text p-2">
+          To use My E-Guardian App, you must first create an account. To create
+          an account, click on the signup button in the navigation bar. You will
+          be prompted to enter your first name, last name, email, phone
+          number,and some other signup info. After you have entered all of this
+          information and submit your signup, you will be redirected to the to
+          your dashboard.
+        </p>
+      </section>
+    </div>
   );
 }

@@ -316,9 +316,6 @@ const Journey = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* Journeys list */}
-      {/* ... */}
     </div>
   );
 };

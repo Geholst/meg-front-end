@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     number: "",
@@ -18,23 +19,14 @@ export default function Login() {
 
     if (validateForm()) {
       console.log(formData);
-      // https://meg-backend.herokuapp.com/signup  || http://127.0.0.1:3001/signup
       let results = await fetch("https://meg-backend.herokuapp.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          firstName: formData.firstname,
-          lastName: formData.lastname,
-          email: formData.email,
-          password: formData.password,
-          number: formData.number,
-          allergies: formData.allergies,
-          preferredHospital: formData.preferredHospital,
-        }),
+        body: JSON.stringify(formData),
       });
-      if (results.status === 200) {
+      if (results.ok) {
         results = await results.json();
         localStorage.setItem("userId", results.New_User.userId);
         localStorage.setItem("token", results.New_User.jwtToken);
@@ -58,16 +50,15 @@ export default function Login() {
     let isValid = true;
     const newErrors = {};
 
-    // Basic Validation using a combination of regex and string methods
-    if (formData.firstname.trim() === "") {
-      newErrors.firstname = "First name is required.";
-      isValid = false;
-    }
-
-    if (formData.lastname.trim() === "") {
-      newErrors.lastname = "Last name is required.";
-      isValid = false;
-    }
+    // Simple Validation
+    ["firstName", "lastName", "preferredHospital"].forEach((name) => {
+      if (formData[name].trim() === "") {
+        newErrors[name] = `${
+          name.charAt(0).toUpperCase() + name.slice(1)
+        } is required.`;
+        isValid = false;
+      }
+    });
 
     if (!formData.email.match(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/)) {
       newErrors.email = "Invalid email address.";
@@ -84,109 +75,123 @@ export default function Login() {
       isValid = false;
     }
 
-    if (formData.preferredHospital.trim() === "") {
-      newErrors.preferredHospital = "Preferred hospital is required.";
-      isValid = false;
-    }
-
-    // a react hook that will update the state of the component if there are any errors
     setErrors(newErrors);
     return isValid;
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          First Name:
-          <input
-            type="text"
-            name="firstname"
-            value={formData.firstname}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.firstname && <div className="error">{errors.firstname}</div>}
-      </div>
-      <div>
-        <label>
-          Last Name:
-          <input
-            type="text"
-            name="lastname"
-            value={formData.lastname}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.lastname && <div className="error">{errors.lastname}</div>}
-      </div>
-      <div>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.email && <div className="error">{errors.email}</div>}
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.password && <div className="error">{errors.password}</div>}
-      </div>
-      <div>
-        <label>
-          Phone Number:
-          <input
-            type="tel"
-            name="number"
-            value={formData.number}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.number && <div className="error">{errors.number}</div>}
-      </div>
-      <div>
-        <label>
-          Allergies:
-          <textarea
-            name="allergies"
-            value={formData.allergies}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Preferred Hospital:
-          <input
-            type="text"
-            name="preferredHospital"
-            value={formData.preferredHospital}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.preferredHospital && (
-          <div className="error">{errors.preferredHospital}</div>
-        )}
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}>
+      <Row>
+        <Col>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>First Name:</Form.Label>
+              <Form.Control
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                isInvalid={!!errors.firstName}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.firstName}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Last Name:</Form.Label>
+              <Form.Control
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                isInvalid={!!errors.lastName}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.lastName}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                isInvalid={!!errors.email}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                isInvalid={!!errors.password}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Phone Number:</Form.Label>
+              <Form.Control
+                type="tel"
+                name="number"
+                value={formData.number}
+                onChange={handleChange}
+                isInvalid={!!errors.number}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.number}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Allergies:</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="allergies"
+                value={formData.allergies}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Preferred Hospital:</Form.Label>
+              <Form.Control
+                type="text"
+                name="preferredHospital"
+                value={formData.preferredHospital}
+                onChange={handleChange}
+                isInvalid={!!errors.preferredHospital}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.preferredHospital}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }

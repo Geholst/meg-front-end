@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -12,8 +13,6 @@ export default function Login() {
     event.preventDefault();
 
     if (validateForm()) {
-      // console.log(formData);
-      // https://meg-backend.herokuapp.com/login  || http://127.0.0.1:3001/login
       let results = await fetch("https://meg-backend.herokuapp.com/login", {
         method: "POST",
         headers: {
@@ -31,11 +30,8 @@ export default function Login() {
         localStorage.setItem("userId", results.userId);
         localStorage.setItem("token", results.jwtToken);
         localStorage.setItem("email", results.email);
-        // Successful login, handle the response data
-        // console.log(results);
         window.location.href = "/dashboard";
       } else {
-        // Login failed, display an error message
         localStorage.removeItem("userId");
         localStorage.removeItem("token");
         localStorage.removeItem("email");
@@ -70,34 +66,46 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.email && <div className="error">{errors.email}</div>}
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        {errors.password && <div className="error">{errors.password}</div>}
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}>
+      <Row>
+        <Col>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                isInvalid={!!errors.email}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                isInvalid={!!errors.password}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
