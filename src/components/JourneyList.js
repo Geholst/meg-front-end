@@ -40,19 +40,38 @@ const JourneysList = () => {
         <ListGroup>
           {journeys.map((journey, index) => (
             <ListGroup.Item key={index}>
-              <p>Type: {journey.type}</p>
-              <p>Details: {journey.details}</p>
-              <p>Start Time: {journey.startTime}</p>
-              <p>End Time: {journey.endTime}</p>
-              <p>Route: {journey.route}</p>
-              <p>Name: {journey.name}</p>
-              <p>Username: {journey.username}</p>
-              <p>License Plate: {journey.licensePlate}</p>
-              <p>Color: {journey.color}</p>
-              <p>Year: {journey.year}</p>
-              <p>Make: {journey.make}</p>
-              <p>Model: {journey.model}</p>
-              <p>Image Name: {journey.imageName}</p>
+              <span className="text-primary">Type: {journey.type}</span>
+              <br />
+              <span className="text-primary">Details: {journey.details}</span>
+              <br />
+              <span className="text-primary">
+                Start Time: {journey.startTime}
+              </span>
+              <br />
+              <span className="text-primary">End Time: {journey.endTime}</span>
+              <br />
+              <span className="text-primary">Route: {journey.route}</span>
+              <br />
+              <span className="text-primary">Name: {journey.name}</span>
+              <br />
+              <span className="text-primary">Username: {journey.username}</span>
+              <br />
+              <span className="text-primary">
+                License Plate: {journey.licensePlate}
+              </span>
+              <br />
+              <span className="text-primary">Color: {journey.color}</span>
+              <br />
+              <span className="text-primary">Year: {journey.year}</span>
+              <br />
+              <span className="text-primary">Make: {journey.make}</span>
+              <br />
+              <span className="text-primary">Model: {journey.model}</span>
+              <br />
+              <span className="text-primary">
+                Image Name: {journey.imageName}
+              </span>
+              <br />
               {/* Display the image if it exists and is a valid URL */}
               {journey.image && (
                 <img src={journey.image} alt={journey.imageName} />
